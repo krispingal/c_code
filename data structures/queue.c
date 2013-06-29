@@ -2,60 +2,51 @@
 #include<stdlib.h>
 
 struct node{
-  int data;
+  int val;
   struct node *next;
-}*start ,*temp;
+}*start, *temp;
 
-struct node* enqueue(struct node *current ,int dat){
+struct node* enqueue(struct node *current, int data){
   if (current == NULL){
     current = malloc(sizeof(start));
-    current->data = dat;
-    current->next = NULL;
-    return (current);
-  }
-  else
-    current->next = enqueue(current->next ,dat);
-  return (current);
-}
-
-struct node* dequeue(struct node *current){
-  if (current == NULL)
-    return (current);
-  else if (current->next == NULL){
-    temp = current->next;
-    free(temp);
+    current->val = data;
     current->next = NULL;
   }
   else
-    current->next = dequeue(current->next);
+    current->next = enqueue(current->next, data);
   return (current);
 }
 
-void traversal(struct node *current){
+struct node* dequeue (struct node *current){
+  if (current == NULL){
+    printf("\n Underflow\n");
+    return current;
+  }
+  temp = current;
+  free(temp);
+  return (current->next);
+}
+void traversal (struct node *current){
   if (current == NULL)
     return;
-  printf("%d \t",current->data);
+  printf("%d \t",current->val);
   traversal(current->next);
-  return;
 }
 
 int main(){
-  int i , t ,n;
+  int i, l , data;
   start = NULL;
-  printf("Enter the no. of elements to be entered in queue:");
-  scanf("%d",&n);
-  printf("Enter the elements:\n");
-  for (i = 0; i < n; i++){
-    scanf("%d",&t);
-    start = enqueue(start , t);
+  printf("Enter Queue length:\n");
+  scanf("%d", &l);
+  printf("Enter queue elements\n");
+  for(i = 0; i < l; i++){
+    scanf("%d", &data);
+    start = enqueue(start, data);
   }
+  printf("Queue: ");
   traversal(start);
-  printf("Enter a no. to be enqueued :");
-  scanf("%d",&t);
-  start = enqueue(start , t);
-  traversal(start);
-  printf("\nQueue after dequeued\n");
+  printf("\nQueue after dequeue: ");
   start = dequeue(start);
   traversal(start);
-  return(0);
+  return 0;
 }

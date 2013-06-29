@@ -1,102 +1,106 @@
-//this program is tocreate a binary search tree
+/*This code implements a binary search tree
+with options to perform
+*preorder
+*inorder
+*postorder
+traversal
+find-grand parent of an element
+*/
+
 #include<stdio.h>
 #include<stdlib.h>
 
-struct bstree{                                 
-  int data;
-  struct bstree *right;
-  struct bstree *left;
+struct bstree{
+  int DATA;
+  struct bstree *RIGHT;
+  struct bstree *LEFT;
+}*root, *temp;
 
-}*root;
-
-struct bstree* insert (struct bstree *current , int dat){
-  if ( current == NULL){
-    current = malloc( sizeof(struct bstree));
-    current->data = dat;
-    current->right = NULL;
-    current->left = NULL;
-    printf("\n  Allocating %d to terminal node",current->data);
-    }
-  else if ( current->data < dat){
-    printf("\nputting %d to right of %d",dat,current->data);
-    current->right = insert(current->right,dat);    
-    }
-  else{
-    printf("\nputting %d to left of %d",dat,current->data);
-    current->left =insert(current->left,dat);
-    }
+struct bstree* insert (struct bstree *current, int data){
+  if (current == NULL){
+    current = malloc(sizeof (root));
+    current->DATA = data;
+    current->RIGHT = NULL;
+    current->LEFT = NULL;
+  }
+  else {
+    if (data <= current->DATA)
+      current->LEFT = insert(current->LEFT, data);
+    else 
+      current->RIGHT = insert(current->RIGHT, data);
+  }
   return (current);
 }
 
-void inorder(struct bstree *current ){
+void inorder (struct bstree *current){
   if (current == NULL)
     return;
-  inorder(current->left);
-  printf("%d\t",current->data);
-  inorder(current->right);
+  inorder (current->LEFT);
+  printf("\t%d", current->DATA);
+  inorder (current->RIGHT);
   return;
 }
 
-void preorder(struct bstree *current){
+void preorder (struct bstree *current){
   if (current == NULL)
     return;
-  printf("%d \t",current->data);
-  preorder(current->left);
-  preorder(current->right);
+  printf("\t%d",current->DATA);
+  preorder (current->LEFT);
+  preorder (current->RIGHT);
   return;
 }
-void postorder(struct bstree *current){
+
+void postorder (struct bstree *current){
   if (current == NULL)
     return;
-  postorder(current->left);
-  postorder(current->right);
-  printf("%d \t",current->data);
+  postorder(current->LEFT);
+  postorder(current->RIGHT);
+  printf("\t%d",current->DATA);
   return;
 }
-int findgp(struct bstree *current, int t){
-  int key= -999;
-  if(current ==NULL){
-    printf("\nno. not present in bst"); 
-    return(-999);
+
+int find_gp (struct bstree *current, int tar){
+  int count;
+  if (current == NULL){
+    printf("\nElement not present in tree\n");
+    return (count);
   }
-  if(current->data ==t)
-    return(-26);
-    else if(current->data < t)
-      key = findgp(current->right , t);
-    else
-      key = findgp(current->left , t);
-  if (key == -26)
-    return(-25);
-  else if (key == -25)
-    return (current->data);
-  else
-    return(key);
+  if (tar == current->DATA)
+    return (-2);
+  else if (tar < current->DATA)
+    count = find_gp(current->LEFT, tar);
+  else 
+    count = find_gp(current->RIGHT, tar);
+  if (count == -2)
+    return (-3);
+  else  if (count == -3)
+    return (current->DATA);
+
+ return count;
 }
+
 int main(){
-  int k, i ,ar[10];
+  int i,  size = 12;
+  int t[] = {8, 12, 6, 14, 24, 5, 3, 7, 2, 54, 30, 20};
   root = NULL;
-  printf("Enter any +ve numbers\n");
-  for (i =0;i < 10; i++)
-    scanf("%d",&ar[i]);
-
-  //the next section of code will invoke bstree fn. which will create the binary search tree
-  for( i = 0;i < 10; i++){
-    k = ar[i];
-    root = insert(root,k);
+  printf("Input array:");
+  for (i = 0; i < size; i++){
+    printf("%d \t",t[i]);
+    root = insert(root, t[i]);
   }
-  printf("\n");
-  preorder(root);
-  printf("\n");
+  printf("\nInorder traversal:");
   inorder(root);
-  printf("\n");
+  printf("\nPre-order traversal:");
+  preorder(root);
+  printf("\nPost-order traversal:");
   postorder(root);
-  printf("\nEnter a no. to be searched in the tree and to find it's grandparent");
+  printf("\nEnter any element in the bst, to find it's grand parent: ");
   scanf("%d",&i);
-  k = i;
-  i=findgp(root,i);
-  if(i < 0)
-    printf("\n%d has no gp in the bst",k);
+  size = find_gp(root, i);
+  if (size < 0)
+    printf("No grandparent for element %d",i);
   else
-    printf("\n%d has %d as it's gp",k,i);
+    printf("Given element's grand parent is :%d", size);
+  printf("\n");
   return 0;
 }

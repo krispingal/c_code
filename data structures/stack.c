@@ -1,63 +1,61 @@
+///This code implements a stack using linked list
+
 #include<stdio.h>
 #include<stdlib.h>
+
 struct node{
-  int data;
-  struct node *next;
-}*start, *temp;
+  int DATA;
+  struct node *NEXT;
+}*top, *temp;
 
-struct node* push(struct node *current , int dat){
+struct node* push (struct node *current, int data){
   if (current == NULL){
-    temp = malloc(sizeof(struct node));
-    temp->data =dat;
-    temp->next = NULL;
-    current = temp;
+    current = malloc(sizeof (top));
+    current->DATA = data;
+    current->NEXT = NULL;
   }
-  else
-    current->next = push(current->next,dat);
-  return(current);
+  else{
+    struct node *tmp = malloc(sizeof (top));
+    tmp->DATA = data;
+    tmp->NEXT = current;
+    current = tmp;
+  }
+  return (current);
 }
 
-struct node* pop(struct node *current){
+struct node* pop (struct node *current){
+  temp = current;
   if (current == NULL){
-    printf("\nUnderflow");
-    return(current);
+    printf("\nUnderflow\n");
+    return (current);
   }
-  else if(current->next == NULL){
-    temp = current->next;
-    current->next = NULL;
-    free(temp);
-    return(NULL);
-  }
-  else 
-    current->next = pop(current->next);
-  return(current);
+  current = current->NEXT;
+  free(temp);
+  return (current);
 }
 
-void traversal(struct node*current){
+void traversal (struct node *current){
   if (current == NULL)
     return;
-  printf("%d \t",current->data);
-  traversal(current->next);
-  return;
+  printf("%d\t", current->DATA);
+  traversal(current->NEXT);
 }
 
 int main(){
-  int i , n, t;
-  start = NULL;
-  printf("Enter the no. of elements to be entered in the stack:");
-  scanf("%d",&n);
-  printf("Enter the no. in the stack\n");
-  for(i = 0;i < n; i++){
-    scanf("%d",&t);
-    start = push(start ,t);
-  }
-  traversal(start);
-  printf("Enter any no. to be pushed into stack:");
-  scanf("%d",&t);
-  start = push(start ,t);
-  traversal(start);
-  printf("\nstack after pop\n");
-  start = pop(start);
-  traversal(start);
+  int i, size;
+  int t[] = {12, 32, 52, 7, 857, 4};
+  size = 6;
+  top = NULL;
+  for (i = 0; i < size ; i++)
+    top = push(top, t[i]);
+  printf("Stack:\n");
+  traversal(top);
+  printf("\nStack after pop: ");
+  top = pop(top);
+  traversal(top);
+
+  printf("\n");
   return 0;
 }
+
+ 
