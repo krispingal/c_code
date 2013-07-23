@@ -4,6 +4,8 @@ algorithms. All of these problems are implemented in c, which
 i find it easier to implement most of them.
 The code i write in this based (heavily, i think) on the 
 introductions to algorithms, by Thomas H. Cormen et al.
+and for C I used K & R c..
+
 
 Well this was my original intention but i found some questions
 which was not "hard" but still interested me.
