@@ -1,0 +1,20 @@
+Hi,
+This folder was created to store some miscellaneous 
+problems that I found interesting/basic for computer
+science.
+P01------ To find all the ancestors of a given binary tree without using recursion  
+P02------ Implement binary search
+P03------ Eliminate duplicate characters of a string
+p03.5---- Eliminate duplicate characters of a string using hashing
+P04------ Generate strings from string patterns with wildcards(characters only 0,1)
+P05------ Traversee a linked list and delete N nodes after M nodes
+P06------ Find the majority number in an array > N/2, there may be no majority number too
+p07------ Find the arrangement of two arrays of same size so that sum of product is minimum
+p08------ Implement Euclid's algorithm to find GCD of two numbers
+p09------ Implement caesar's cipher
+p10------ Create a mirror image of a bst
+p11------ Find n'th fibonacci number
+p12------ code to evaluate string composed of numbers and '+' and '*'
+p13------ Find the maximum product of three numbers from a list
+p14------ swap the k'th node from the start with k'th node from end using changing of pointers only
+ 
