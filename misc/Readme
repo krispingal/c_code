@@ -16,5 +16,7 @@ p10------ Create a mirror image of a bst
 p11------ Find n'th fibonacci number
 p12------ code to evaluate string composed of numbers and '+' and '*'
 p13------ Find the maximum product of three numbers from a list
-p14------ swap the k'th node from the start with k'th node from end using changing of pointers only
+p14------ swap the k'th node from the start with k'th node from end using pointers only
+p15------ Finding Endianness of a system
+p16------ reverse a linked list in-order
  
