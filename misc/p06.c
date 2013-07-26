@@ -22,16 +22,19 @@ void bubble_sort (int A[], int size){
 //After sorting posssible majority number will also occupy middlemost number, since
 //count(majority number) > size/2, then start a count of this number & check if > size/2 
 void majority_number (int A[], int size){
-  int i, count = 0;
+  int i, half_length, flag = 0;
+  half_length = size/2;
   bubble_sort (A, size);     
-  int temp = A[size/2]; 
-  for (i = 0; i < size; i++){
-    if (A[i] == temp)
-      count++;
-    else if (count > 0)                        // if no longer the majority(possible) number
+  int temp = A[half_length]; 
+  for (i = 0; i < half_length; i++){
+    if (A[i] == temp && A[i+half_length] == temp){
+      flag = 1;
+      break;
+    }
+    else if (A[i] == temp)               // if no longer the majority(possible) number
       break;
   }
-  if (count > (size/2))
+  if (flag)
     printf("\n%d is the majority no. in the list\n", temp);
   else
     printf("\nNo majority number in the list\n");
@@ -39,7 +42,7 @@ void majority_number (int A[], int size){
 }
 
 int main(){
-  int a[] = {21, 8, 7, 8, 8, 8, 8, 7, 8, 8, 2, 4, 8, 8};
+  int a[] = {21, 18, 7, 82, 80, 8, 8, 7, 8, 8, 2, 4, 8, 8};
   int i, size = 10;
   printf("List is : ");
   for (i = 0; i < size; i++)
